@@ -25,6 +25,7 @@ public class SolicitacaoController {
 
         return ResponseEntity.status(201).body(solicitacaoCreated);
     }
+
     // Retorna todas as podas cadastradas (pode liberar essa opção apenas para administradores
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)

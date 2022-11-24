@@ -24,7 +24,7 @@ public class Solicitacao implements Serializable {
 
     private String email;
 
-    private int cpf;
+    private String cpf;
 
     private String rua;     // Dados do local da poda (!!!)
 
@@ -32,7 +32,7 @@ public class Solicitacao implements Serializable {
 
     private int numero;
 
-    private int cep;
+    private String cep;
 
     private String detalhes;
 
