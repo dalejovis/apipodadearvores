@@ -14,16 +14,20 @@ import java.util.Optional;
 @RequestMapping("/podadearvores")
 public class SolicitacaoController {
 
-    @Autowired
+
     SolicitacaoService service;
+    @Autowired
+    public SolicitacaoController(SolicitacaoService service){ //injeção por meio de construtor!
+        this.service = service;
+    }
 
     // Criação de nova Solicitação de poda
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+//    @ResponseStatus(HttpStatus.CREATED)  //se o retorno do metodo é ResponseEntitty<?>, não precisa colocar essa anotação.
     public ResponseEntity<Solicitacao> create(@RequestBody Solicitacao solicitacao) {
         Solicitacao solicitacaoCreated = service.create(solicitacao);
 
-        return ResponseEntity.status(201).body(solicitacaoCreated);
+        return ResponseEntity.status(HttpStatus.CREATED).body(solicitacaoCreated); //alterei o codigo do status p status em si pra facilitar a compreensão
     }
 
     // Retorna todas as podas cadastradas (pode liberar essa opção apenas para administradores
@@ -37,6 +41,7 @@ public class SolicitacaoController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Optional<Solicitacao> findById(@PathVariable Long id) {
+
         return service.findById(id);
     }
 
