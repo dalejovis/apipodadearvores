@@ -32,17 +32,18 @@ public class SolicitacaoController {
 
     // Retorna todas as podas cadastradas (pode liberar essa opção apenas para administradores
     @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
     public List<Solicitacao> findAll() {
         return service.findAll();
     }
 
     // Retorna por id
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Optional<Solicitacao> findById(@PathVariable Long id) {
-
-        return service.findById(id);
+    public ResponseEntity<Object> findById(@PathVariable Long id) { 
+        if (service.findById(id) == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Essa solicitação não existe!");
+        }
+        Solicitacao solicitacao = service.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(solicitacao);
     }
 
     // Criar um retorno por nome do solicitante
